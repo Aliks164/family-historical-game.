@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAMILY HISTORICAL — Soviet Mobile</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --site-primary: #111111;
+  --site-secondary: #292929;
+  --site-background: #090909;
+  --site-on-primary: #ffffff;
+  --site-on-secondary: #ffffff;
+  --site-on-background: #f4f4f4;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --paper: light-dark(#f4f4f2, #111111);
+  --surface: light-dark(#ffffff, #191919);
+  --surface-2: light-dark(#e9e9e6, #222222);
+  --ink: light-dark(#111111, #f4f4f4);
+  --muted: light-dark(#686868, #a4a4a4);
+  --line: light-dark(#d9d9d5, #333333);
+  --inverse: light-dark(#111111, #f5f5f5);
+  --inverse-ink: light-dark(#ffffff, #101010);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--site-font-body); }
+button, input { font: inherit; }
+a { color: inherit; text-decoration: none; }
+#app { min-height: 100vh; width: 100%; background-color: var(--site-background); color: var(--site-on-background); border-radius: 0; }
+.topbar { position: sticky; top: 0; z-index: 20; background: var(--site-primary); color: var(--site-on-primary); border-bottom: 1px solid #ffffff22; }
+.nav { max-width: 1180px; margin: auto; padding: calc(16px * var(--site-spacing-scale)) 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 850; letter-spacing: .11em; font-size: 14px; }
+.mark { width: 37px; height: 37px; display: grid; place-items: center; border: 1px solid #ffffff88; font-size: 14px; letter-spacing: 0; }
+.navlinks { display: flex; align-items: center; gap: 20px; font-size: 12px; color: #d1d1d1; }
+.navlinks a:hover { color: #fff; }
+.menu-toggle { display: none; background: transparent; border: 1px solid #ffffff55; color: white; padding: 8px 10px; }
+.hero { position: relative; overflow: hidden; background: var(--site-primary); color: var(--site-on-primary); }
+.hero::after { content: "F"; position: absolute; right: 4%; top: -105px; font-size: clamp(340px, 50vw, 650px); font-weight: 900; line-height: 1; color: #ffffff; opacity: calc(.035 * var(--site-decoration-opacity)); pointer-events: none; }
+.hero-inner { max-width: 1180px; margin: auto; padding: clamp(70px, 10vw, 130px) 24px 86px; position: relative; z-index: 1; }
+.eyebrow { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #bdbdbd; font-weight: 700; }
+.eyebrow::before { content: ""; width: 26px; height: 2px; background: currentColor; }
+h1, h2, h3 { font-family: var(--site-font-heading); margin: 0; letter-spacing: -.045em; }
+h1 { font-size: clamp(52px, 10vw, 108px); line-height: .94; max-width: 850px; margin-top: 24px; font-weight: 900; }
+h1 span { color: #a9a9a9; }
+.hero-copy { color: #c5c5c5; max-width: 540px; line-height: 1.75; font-size: 15px; margin: 28px 0 30px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--line); padding: 13px 17px; border-radius: calc(3px * var(--site-radius-scale)); font-size: 12px; font-weight: 750; cursor: pointer; transition: transform .18s, background .18s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-light { background: #f4f4f4; color: #111; border-color: #f4f4f4; }
+.btn-ghost { background: transparent; color: white; border-color: #ffffff66; }
+.stats { max-width: 1180px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ffffff22; border-top: 1px solid #ffffff22; }
+.stat { background: var(--site-primary); padding: 22px 0 22px 20px; }
+.stat strong { display: block; font-size: 23px; letter-spacing: -.04em; }
+.stat span { display: block; margin-top: 6px; color: #aaa; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+main { background: var(--paper); color: var(--ink); }
+.section { max-width: 1180px; margin: auto; padding: 84px 24px; }
+.section-head { display: flex; justify-content: space-between; align-items: end; gap: 25px; margin-bottom: 30px; }
+.section-head h2 { font-size: clamp(31px, 5vw, 48px); line-height: 1.05; }
+.section-head p { max-width: 420px; margin: 0; color: var(--muted); line-height: 1.7; font-size: 13px; }
+.kicker { color: var(--muted); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 800; margin-bottom: 13px; }
+.about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+.about-card { padding: 30px; border: 1px solid var(--line); background: var(--surface); }
+.about-card h3 { font-size: 23px; margin-bottom: 14px; }
+.about-card p { color: var(--muted); font-size: 13px; line-height: 1.85; margin: 0; }
+.principles { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.principle { border: 1px solid var(--line); padding: 18px; background: var(--surface); }
+.principle b { display: block; font-size: 13px; margin-bottom: 7px; }
+.principle span { color: var(--muted); font-size: 12px; line-height: 1.65; }
+.section-dark { background: var(--site-secondary); color: var(--site-on-secondary); }
+.section-dark .section-head p, .section-dark .kicker { color: #b4b4b4; }
+.wide-inner { max-width: 1180px; padding: 82px 24px; margin: auto; }
+.career-list { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.career { border: 1px solid #ffffff2b; padding: 24px; min-height: 220px; background: #ffffff06; }
+.career-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+.level { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: #c3c3c3; }
+.number { font-size: 29px; font-weight: 850; color: #777; }
+.career h3 { font-size: 19px; margin-bottom: 10px; }
+.career p { margin: 0; color: #c0c0c0; font-size: 12px; line-height: 1.75; }
+.note { margin-top: 18px; padding: 15px 18px; border-left: 2px solid #aaa; color: #c9c9c9; background: #ffffff08; font-size: 12px; line-height: 1.7; }
+.department-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.department { background: var(--surface); border: 1px solid var(--line); padding: 25px; }
+.dept-icon { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--line); font-size: 17px; margin-bottom: 22px; }
+.department h3 { font-size: 18px; margin-bottom: 10px; }
+.department p { color: var(--muted); font-size: 12px; line-height: 1.75; margin: 0 0 16px; }
+.department ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.tasks { display: grid; grid-template-columns: 260px 1fr; gap: 28px; }
+.task-tabs { display: flex; flex-direction: column; gap: 6px; }
+.task-tab { text-align: left; background: transparent; color: var(--ink); border: 1px solid var(--line); padding: 14px 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+.task-tab span { color: var(--muted); font-size: 10px; }
+.task-tab.active { background: var(--inverse); color: var(--inverse-ink); border-color: var(--inverse); }
+.task-panel { background: var(--surface); border: 1px solid var(--line); padding: 28px; min-height: 320px; }
+.task-panel h3 { font-size: 26px; margin-bottom: 8px; }
+.task-panel .sub { color: var(--muted); font-size: 12px; line-height: 1.7; margin-bottom: 22px; }
+.task-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.task-list li { display: flex; align-items: start; gap: 11px; font-size: 13px; line-height: 1.65; }
+.task-list li::before { content: "✓"; display: grid; place-items: center; flex: 0 0 20px; width: 20px; height: 20px; border: 1px solid var(--line); font-size: 11px; }
+.rules-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.rule { display: flex; gap: 15px; padding: 22px; background: var(--surface); border: 1px solid var(--line); }
+.rule-num { color: var(--muted); font-size: 12px; font-weight: 800; }
+.rule h3 { font-size: 15px; margin-bottom: 7px; letter-spacing: -.02em; }
+.rule p { color: var(--muted); font-size: 12px; line-height: 1.7; margin: 0; }
+.report { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: stretch; }
+.report-card { padding: 30px; background: var(--surface); border: 1px solid var(--line); }
+.report-card h3 { font-size: 22px; margin-bottom: 12px; }
+.report-card p { color: var(--muted); font-size: 13px; line-height: 1.8; }
+.report-template { background: var(--surface-2); border: 1px dashed var(--line); padding: 16px; font-size: 12px; line-height: 1.9; white-space: pre-line; }
+.copy-btn { margin-top: 13px; background: var(--inverse); color: var(--inverse-ink); border: 0; padding: 12px 15px; cursor: pointer; font-size: 12px; font-weight: 750; }
+.footer { background: var(--site-primary); color: #fff; padding: 34px 24px; }
+.footer-inner { max-width: 1180px; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.footer p { color: #aaa; font-size: 11px; line-height: 1.7; margin: 7px 0 0; }
+.footer-tag { border: 1px solid #ffffff44; padding: 10px 13px; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; }
+@media (max-width: 760px) {
+ .nav { padding: 13px 17px; } .menu-toggle { display: block; } .navlinks { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #111; padding: 20px; flex-direction: column; align-items: flex-start; border-bottom: 1px solid #ffffff22; } .navlinks.open { display: flex; }
+ .hero-inner { padding: 75px 20px 55px; } .stats { padding: 0 20px; } .stat { padding-left: 10px; } .stat strong { font-size: 20px; } .stat span { font-size: 9px; letter-spacing: .07em; }
+ .section, .wide-inner { padding: 60px 20px; } .section-head { display: block; } .section-head p { margin-top: 15px; } .about-grid, .report { grid-template-columns: 1fr; } .career-list, .department-grid { grid-template-columns: 1fr; } .career { min-height: 0; } .career-top { margin-bottom: 18px; } .tasks { grid-template-columns: 1fr; } .task-tabs { display: grid; grid-template-columns: 1fr 1fr; } .task-tab { gap: 6px; } .rules-grid, .principles { grid-template-columns: 1fr; } .footer-inner { align-items: flex-start; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <nav class="nav" aria-label="Основная навигация">
+      <a class="brand" href="#home" aria-label="FAMILY HISTORICAL главная"><span class="mark">F.</span><span>FAMILY HISTORICAL <span style="font-weight:400;color:#aaa">/ SOVIET MOBILE</span></span></a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false">МЕНЮ ☰</button>
+      <div class="navlinks" id="navlinks"><a href="#about">О ФАМЕ</a><a href="#career">КАРЬЕРА</a><a href="#departments">ОТДЕЛЫ</a><a href="#tasks">ЗАДАНИЯ</a><a href="#rules">ПРАВИЛА</a><a href="#penalties">НАКАЗАНИЯ</a></div>
+    </nav>
+  </header>
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="eyebrow">Официальная информационная страница</div>
+      <h1>FAMILY<br><span>HISTORICAL.</span><br>НАСЛЕДИЕ.</h1>
+      <p class="hero-copy">Добро пожаловать на официальный информационный сайт FAMILY HISTORICAL. Здесь собраны структура руководства, карьерная лестница, обязанности отделов и основные правила нашего сообщества в Soviet Mobile.</p>
+      <div class="actions"><a class="btn btn-light" href="#career">Изучить карьеру <span>↘</span></a><a class="btn btn-ghost" href="#rules">Правила фамы <span>↗</span></a></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong>01—05</strong><span>Ступени заместителей</span></div>
+      <div class="stat"><strong>05</strong><span>Рабочих направлений</span></div>
+      <div class="stat"><strong>100%</strong><span>Ответственность за дело</span></div>
+    </div>
+  </section>
+  <main>
+    <section class="section" id="about">
+      <div class="section-head"><div><div class="kicker">01 / О сообществе</div><h2>О нашей фамилии</h2></div><p>Единая команда, в которой каждый понимает свои обязанности и вносит вклад в развитие общего состава.</p></div>
+      <div class="about-grid">
+        <article class="about-card"><h3>Наша цель</h3><p>Создать активную и организованную фамилию в Soviet Mobile: проводить совместные мероприятия, помогать участникам, поддерживать уважительное общение и развивать руководство на основе реальных результатов. Страница служит внутренним справочником и может обновляться лидером.</p></article>
+        <div class="principles">
+          <div class="principle"><b>Дисциплина</b><span>Соблюдаем договорённости и правила сообщества.</span></div>
+          <div class="principle"><b>Уважение</b><span>Общаемся спокойно, без травли и оскорблений.</span></div>
+          <div class="principle"><b>Активность</b><span>Участвуем в жизни фамы и предупреждаем об отсутствии.</span></div>
+          <div class="principle"><b>Честность</b><span>Отчитываемся только о реально выполненной работе.</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="section-dark" id="career">
+      <div class="wide-inner">
+        <div class="section-head"><div><div class="kicker">02 / Рост и ответственность</div><h2>Карьерная лестница</h2></div><p>Повышение зависит от активности, качества работы, ответственности и решения лидера. Сроки ниже — внутренняя система фамы, а не официальная механика игры.</p></div>
+        <div class="career-list">
+          <article class="career"><div class="career-top"><span class="level">Ступень 01</span><span class="number">01</span></div><h3>Доверенное лицо</h3><p>Координирует заместителей, проверяет отчёты, помогает лидеру принимать организационные решения.</p></article>
+          <article class="career"><div class="career-top"><span class="level">Ступень 02</span><span class="number">02</span></div><h3>Старший заместитель</h3><p>Руководит направлением, контролирует выполнение планов и помогает разрешать спорные ситуации.</p></article>
+          <article class="career"><div class="career-top"><span class="level">Ступень 03</span><span class="number">03</span></div><h3>Заместитель</h3><p>Ведёт свой отдел, организует работу и передаёт руководству результаты.</p></article>
+          <article class="career"><div class="career-top"><span class="level">Ступень 04</span><span class="number">04</span></div><h3>Младший заместитель</h3><p>Помогает отделам, выполняет поручения и учится самостоятельно решать рабочие задачи.</p></article>
+          <article class="career"><div class="career-top"><span class="level">Ступень 05</span><span class="number">05</span></div><h3>Стажёр заместителя</h3><p>Изучает правила, помогает с простыми задачами и проходит испытательный срок.</p></article>
+          <article class="career"><div class="career-top"><span class="level">Начальная ступень</span><span class="number">06</span></div><h3>Участник фамы</h3><p>Знакомится с командой, участвует в мероприятиях и показывает надёжность в общих делах.</p></article>
+        </div>
+        <div class="note"><strong>Важно:</strong> повышение не гарантируется только за время в составе. Лидер может запросить отчёты, провести собеседование или дать испытательное задание.</div>
+      </div>
+    </section>
+    <section class="section" id="departments">
+      <div class="section-head"><div><div class="kicker">03 / Организационная структура</div><h2>Отделы фамы</h2></div><p>Каждое направление имеет конкретную задачу. Один заместитель может вести отдел, если это утверждено лидером.</p></div>
+      <div class="department-grid">
+        <article class="department"><div class="dept-icon">01</div><h3>Управление</h3><p>Координация команды руководства и контроль общих задач.</p><ul><li>Проверка отчётов</li><li>План на неделю</li><li>Связь с лидером</li></ul></article>
+        <article class="department"><div class="dept-icon">02</div><h3>Набор и адаптация</h3><p>Поиск новых участников и помощь новичкам.</p><ul><li>Приём заявок</li><li>Знакомство с правилами</li><li>Контроль испытательного срока</li></ul></article>
+        <article class="department"><div class="dept-icon">03</div><h3>Мероприятия</h3><p>Совместный досуг и активности для состава.</p><ul><li>Автопробеги и встречи</li><li>Конкурсы и розыгрыши</li><li>Скриншоты результатов</li></ul></article>
+        <article class="department"><div class="dept-icon">04</div><h3>Активность состава</h3><p>Поддержка вовлечённости и помощь участникам.</p><ul><li>Сбор обратной связи</li><li>Учет активности</li><li>Сообщения о проблемах</li></ul></article>
+        <article class="department"><div class="dept-icon">05</div><h3>Информация и отчёты</h3><p>Порядок в документах и информационных публикациях.</p><ul><li>Обновление справочника</li><li>Оформление объявлений</li><li>Архив отчётов</li></ul></article>
+        <article class="department"><div class="dept-icon">06</div><h3>Стажировка</h3><p>Обучение будущих заместителей и оценка готовности.</p><ul><li>Выдача простых задач</li><li>Проверка знаний</li><li>Рекомендация к повышению</li></ul></article>
+      </div>
+    </section>
+    <section class="section-dark" id="tasks">
+      <div class="wide-inner">
+        <div class="section-head"><div><div class="kicker">04 / Зона ответственности</div><h2>Задания заместителей</h2></div><p>Выбери ступень, чтобы посмотреть пример обязанностей. Руководство может менять задачи в зависимости от онлайна фамы.</p></div>
+        <div class="tasks">
+          <div class="task-tabs" role="tablist" aria-label="Уровни заместителей">
+            <button class="task-tab active" data-level="1" role="tab" aria-selected="true">01 · Доверенное лицо <span>Высшая</span></button>
+            <button class="task-tab" data-level="2" role="tab" aria-selected="false">02 · Старший зам. <span>Руководство</span></button>
+            <button class="task-tab" data-level="3" role="tab" aria-selected="false">03 · Заместитель <span>Отдел</span></button>
+            <button class="task-tab" data-level="4" role="tab" aria-selected="false">04 · Младший зам. <span>Помощь</span></button>
+            <button class="task-tab" data-level="5" role="tab" aria-selected="false">05 · Стажёр <span>Обучение</span></button>
+          </div>
+          <div class="task-panel" id="taskPanel" role="tabpanel" aria-live="polite">
+            <div class="kicker">План работы / уровень 01</div><h3>Доверенное лицо лидера</h3><p class="sub">Главная задача — обеспечить согласованную работу всей команды заместителей и вовремя информировать лидера.</p>
+            <ul class="task-list"><li>Ежедневно проверять прогресс по задачам заместителей.</li><li>Собирать отчёты и отмечать, какие задания завершены.</li><li>Организовать минимум два мероприятия за неделю или согласовать замену с лидером.</li><li>Подготовить недельный план развития фамы.</li><li>Передавать лидеру краткую сводку: активность, проблемы и предложения.</li><li>Не принимать важные решения от имени лидера без согласования.</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="rules">
+      <div class="section-head"><div><div class="kicker">05 / Кодекс участника</div><h2>Правила фамы</h2></div><p>Эти правила являются примером внутреннего регламента. Перед публикацией лидер может изменить формулировки под свою команду.</p></div>
+      <div class="rules-grid">
+        <article class="rule"><span class="rule-num">01</span><div><h3>Уважительное общение</h3><p>Не оскорблять участников, не провоцировать конфликты и не переходить на личности.</p></div></article>
+        <article class="rule"><span class="rule-num">02</span><div><h3>Соблюдение правил игры</h3><p>Соблюдать правила Soviet Mobile и не требовать от участников нарушать их ради фамы.</p></div></article>
+        <article class="rule"><span class="rule-num">03</span><div><h3>Активность и предупреждения</h3><p>Если не получается участвовать в делах фамы, заранее сообщить руководству, когда это возможно.</p></div></article>
+        <article class="rule"><span class="rule-num">04</span><div><h3>Честные отчёты</h3><p>Не присылать чужие или поддельные скриншоты и не отмечать невыполненные задачи как готовые.</p></div></article>
+        <article class="rule"><span class="rule-num">05</span><div><h3>Решение конфликтов</h3><p>Спорные ситуации передавать ответственному заместителю или лидеру без публичных разборок.</p></div></article>
+        <article class="rule"><span class="rule-num">06</span><div><h3>Ответственность руководства</h3><p>Заместители подают пример, не злоупотребляют полномочиями и объясняют решения спокойно и понятно.</p></div></article>
+      </div>
+    </section>
+    <section class="section-dark" id="penalties">
+      <div class="wide-inner">
+        <div class="section-head"><div><div class="kicker">06 / Дисциплинарный кодекс</div><h2>Наказания за нарушения</h2></div><p>Наказание выбирается по тяжести нарушения, доказательствам и истории участника. Перед серьёзным решением руководство выслушивает обе стороны.</p></div>
+        <div class="rules-grid">
+          <article class="rule"><span class="rule-num">01</span><div><h3>Устное предупреждение</h3><p>За первое небольшое нарушение: опоздание без предупреждения, единичный спор или невнимательность к поручению.</p></div></article>
+          <article class="rule"><span class="rule-num">02</span><div><h3>Официальное предупреждение</h3><p>За повторное нарушение, грубое общение или невыполнение задания без объяснения причины. Факт фиксируется руководством.</p></div></article>
+          <article class="rule"><span class="rule-num">03</span><div><h3>Испытательный срок</h3><p>За регулярную пассивность или несколько предупреждений. Участнику назначают срок для исправления ситуации и понятные требования.</p></div></article>
+          <article class="rule"><span class="rule-num">04</span><div><h3>Снятие с должности</h3><p>Для заместителя — за злоупотребление полномочиями, систематическое невыполнение обязанностей или выдачу себя за лидера.</p></div></article>
+          <article class="rule"><span class="rule-num">05</span><div><h3>Исключение из фамы</h3><p>За серьёзные или повторные нарушения: обман руководства, поддельные отчёты, намеренное разжигание конфликтов или предательство доверия.</p></div></article>
+          <article class="rule"><span class="rule-num">06</span><div><h3>Нарушение правил игры</h3><p>Если нарушение касается правил Soviet Mobile, применяются правила и санкции самой игры. Фама не должна требовать нарушать правила сервера.</p></div></article>
+        </div>
+        <div class="note"><strong>Порядок рассмотрения:</strong> зафиксировать ситуацию → выслушать участника → проверить доказательства → выбрать соразмерную меру → сообщить причину. Не назначать наказание только из-за личной неприязни. Участник может обратиться к лидеру для пересмотра решения.</div>
+      </div>
+    </section>
+    <section class="section" id="reports" style="padding-top:0">
+      <div class="section-head"><div><div class="kicker">07 / Единый стандарт</div><h2>Форма отчёта</h2></div><p>Используйте единый формат, чтобы лидеру было легко сравнивать выполненные задачи и видеть результат.</p></div>
+      <div class="report">
+        <article class="report-card"><h3>Шаблон для заместителя</h3><p>Скопируй форму и заполни её после выполнения задания. При необходимости приложи скриншоты из игры.</p><div class="report-template" id="reportTemplate">Имя в игре:
+Уровень заместителя:
+Отдел:
+Дата:
+Выполненные задания:
+Результат:
+Скриншоты:
+Проблемы / предложения:</div><button class="copy-btn" id="copyReport">Скопировать шаблон ↗</button></article>
+        <article class="report-card"><h3>Как оценивается работа</h3><p>Лидер оценивает не только количество выполненных пунктов, но и качество результата, стабильность, командную работу и соблюдение правил.</p><div class="principles" style="margin-top:20px"><div class="principle"><b>Результат</b><span>Задача действительно выполнена.</span></div><div class="principle"><b>Доказательства</b><span>Отчёт понятный и проверяемый.</span></div><div class="principle"><b>Надёжность</b><span>Сроки соблюдаются или заранее согласуются.</span></div><div class="principle"><b>Команда</b><span>Работа помогает всей фамилии.</span></div></div></article>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="footer-inner"><div><div class="brand"><span class="mark">FH</span><span>FAMILY HISTORICAL / SOVIET MOBILE</span></div><p>Внутренний информационный справочник фамы.<br>Не является официальным ресурсом Soviet Mobile.</p></div><div class="footer-tag">Дисциплина · Доверие · Развитие</div></div></footer>
+</div>
+<script>
+const taskData = {
+  1: {title:'Доверенное лицо лидера', kicker:'План работы / уровень 01', sub:'Главная задача — обеспечить согласованную работу всей команды заместителей и вовремя информировать лидера.', tasks:['Ежедневно проверять прогресс по задачам заместителей.','Собирать отчёты и отмечать, какие задания завершены.','Организовать минимум два мероприятия за неделю или согласовать замену с лидером.','Подготовить недельный план развития фамы.','Передавать лидеру краткую сводку: активность, проблемы и предложения.','Не принимать важные решения от имени лидера без согласования.']},
+  2: {title:'Старший заместитель', kicker:'План работы / уровень 02', sub:'Отвечает за отдельное направление и помогает поддерживать порядок в работе руководства.', tasks:['Контролировать выполнение задач своего направления.','Проверять отчёты младших заместителей и давать обратную связь.','Помогать разбирать организационные проблемы состава.','Подготовить сводку результатов к концу недели.','Предлагать улучшения лидеру или доверенному лицу.']},
+  3: {title:'Заместитель', kicker:'План работы / уровень 03', sub:'Руководит назначенным отделом и отвечает за понятный результат.', tasks:['Выполнять план отдела на неделю.','Провести или помочь провести мероприятие по согласованию.','Поддерживать связь с участниками своего направления.','Предоставить отчёт с результатами и доказательствами.','Своевременно сообщать о задержках или проблемах.']},
+  4: {title:'Младший заместитель', kicker:'План работы / уровень 04', sub:'Помогает старшим заместителям и постепенно учится самостоятельно организовывать работу.', tasks:['Выполнять поручения ответственного руководителя.','Помогать с подготовкой мероприятий и набором участников.','Изучить внутренние правила и структуру отделов.','Отправлять короткий отчёт в конце назначенного срока.','Не обещать награды или повышения без разрешения лидера.']},
+  5: {title:'Стажёр заместителя', kicker:'План работы / уровень 05', sub:'Проходит испытательный срок, изучает правила и показывает ответственность на простых задачах.', tasks:['Изучить правила фамы и обязанности отделов.','Присутствовать на согласованном мероприятии и помочь в организации.','Выполнить небольшое поручение и описать результат.','Научиться правильно оформлять отчёт.','Получить обратную связь от куратора стажировки.']}
+};
+const panel = document.getElementById('taskPanel');
+document.querySelectorAll('.task-tab').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.task-tab').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+  const d = taskData[btn.dataset.level];
+  panel.innerHTML = `<div class="kicker">${d.kicker}</div><h3>${d.title}</h3><p class="sub">${d.sub}</p><ul class="task-list">${d.tasks.map(t=>`<li>${t}</li>`).join('')}</ul>`;
+}));
+const toggle = document.getElementById('menuToggle');
+const links = document.getElementById('navlinks');
+toggle.addEventListener('click', () => { const open = links.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(open)); });
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }));
+document.getElementById('copyReport').addEventListener('click', async () => {
+  const text = document.getElementById('reportTemplate').innerText;
+  const btn = document.getElementById('copyReport');
+  try { await navigator.clipboard.writeText(text); btn.textContent = 'Скопировано ✓'; }
+  catch { const range = document.createRange(); range.selectNodeContents(document.getElementById('reportTemplate')); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); btn.textContent = 'Выделено — скопируй вручную'; }
+});
+</script>
+</body>
+</html>
